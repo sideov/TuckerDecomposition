@@ -42,6 +42,24 @@ class TestHOOI(unittest.TestCase):
             self.valid(G, As, X)
 
 
+    def test_hooi_diag(self):
+        K = 10
+        X = np.zeros((K,K,K))
+
+        for i in range(K):
+            X[i,i,i] = 1
+
+        G, As = HOOI(X)
+        self.valid(G, As, X)
+
+        ans = As[0]
+        for i in As[1:]:
+            ans = ans @ i
+
+        ans = ans @ G
+        print(ans) #OK
+
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    print(np.diag(3,5))
